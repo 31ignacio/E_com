@@ -8,6 +8,12 @@
                 <div class="text-center mb-5 text-dark">Rejoindre en tant qu'utilisateurs</div>
                 <div class="card my-5">
 
+                    @if(Session::get('success'))
+                        <div class="alert alert-success">
+                            {{Session::get('success')}}
+                        </div>
+                    @endif
+
                     <form class="card-body cardbody-color p-lg-5" method="post" action="{{route('handleUserRegister')}}">
 
                             @method('post')
@@ -46,9 +52,8 @@
 
                         <div class="text-center"><button type="submit" class="btn btn-color px-5 mb-5 w-100">Créer mon compte</button>
                         </div>
-                        <div id="emailHelp" class="form-text text-center mb-5 text-dark">Not
-                            Registered? <a href="#" class="text-dark fw-bold"> Create an
-                                Account</a>
+                        <div id="emailHelp" class="form-text text-center mb-5 text-dark">
+                            Déjà inscrit ?<a href="#" class="text-dark fw-bold"> Connectez-vous</a>
                         </div>
                     </form>
                 </div>

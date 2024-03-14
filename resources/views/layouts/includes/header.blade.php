@@ -30,7 +30,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{{route('user.register')}}">Crée mon compte</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Me connecter</a></li>
+                        <li><a class="dropdown-item" href="{{route('user.login')}}">Me connecter</a></li>
                     </ul>
                 </li>
             </div>

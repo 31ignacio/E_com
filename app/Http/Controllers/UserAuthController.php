@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 use Exception;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
 
 class UserAuthController extends Controller
@@ -21,6 +25,7 @@ class UserAuthController extends Controller
         ], [
             'name.required'=>'Votre nom est requis',
             'email.required'=>'Votre email est requis',
+            'email.unique'=>'Cette adresse mail est déjà prise', 
             'password.required'=>'Le mot de passe est requis',
             'password.min'=> 'Le mot de passe doit avoir au moins 4 caractères'
         ]);
@@ -28,8 +33,19 @@ class UserAuthController extends Controller
 
         try {
             //code...
+            User::create([
+                'name'=>$request->name,
+                'email'=>$request->email,
+                'password'=> Hash::make($request->password),
+            ]);
+            return redirect()->back()->with('success','Votre compte a été crée. Connecter vous');
         } catch (Exception $e) {
             //throw $th;
         }
-    }   
+    }  
+    
+    public function login(){
+
+        return view('auth.users.login');
+    }
 }

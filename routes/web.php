@@ -19,5 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Inscription
 Route::get('/register', [UserAuthController::class, 'register'])->name('user.register');
 Route::post('/register', [UserAuthController::class, 'handleUserRegister'])->name('handleUserRegister');
+
+//Connexion
+
+Route::get('/login', [UserAuthController::class, 'login'])->name('user.login');
+Route::post('/login', [UserAuthController::class, 'handleUserLogin'])->name('handleUserLogin');
