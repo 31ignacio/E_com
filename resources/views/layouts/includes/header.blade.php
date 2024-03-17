@@ -24,17 +24,28 @@
                 </button>
             </form>
 
-            <div style="margin-left: 1rem;">
-                <li class="nav-item dropdown" style="list-style-type:none;">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Compte</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{{route('user.register')}}">Crée mon compte</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="{{route('user.login')}}">Me connecter</a></li>
-                    </ul>
-                </li>
-            </div>
+                {{-- Si l'utilisateur n'est pas connecté tu m'affiche ca (grace a la methode guest) --}}
+            @guest
+                
+                <div style="margin-left: 1rem;">
+                    <li class="nav-item dropdown" style="list-style-type:none;">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Compte</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{{route('user.register')}}">Crée mon compte</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item" href="{{route('user.login')}}">Me connecter</a></li>
+                        </ul>
+                    </li>
+                </div>
+            @endguest
 
+            {{-- Ce qui va s'afficher lorsqu'un utilisateur est connecté --}}
+
+            @auth
+                <a href="{{route('user.logout')}}" class="btn btn-danger" style="margin-left: 1rem;"> Me déconnecter</a>
+            @endauth
+
+            
         </div>
     </div>
 </nav>
