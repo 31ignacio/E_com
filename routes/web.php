@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\VendorAuthenticationController;
@@ -63,6 +64,13 @@ Route::prefix('vendors/accounts')->group(function() {
 Route::middleware('vendor_middleware')->prefix('vendors/dashboard')->group(function() {
 
     Route::get('/', [VendorDahboard::class, 'index'])->name('vendors.dashboard');
+
+    Route::prefix('articles')->group(function(){
+        Route::get('/',[ArticleController::class, 'index'])->name('articles.index');
+        Route::get('/create', [ArticleController::class, 'create'])->name('articles.create');
+    });
+
+
     Route::get('/logout', [VendorDahboard::class, 'logout'])->name('vendors.logout');
 
 });
