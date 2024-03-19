@@ -31,19 +31,19 @@ class VendorAuthenticationController extends Controller
             'password.min'=> 'Le mot de passe doit avoir au moins 4 caractères'
         ]);
 
-        // try {
+        try {
         //     //code...
-        //     if(auth()->attempt($request->only('email','password'))){
-        //         //Rediriger vers la page d'accueil
+            if(auth('vendor')->attempt($request->only('email','password'))){
+                //Rediriger vers la page d'accueil
 
-        //         return redirect('/');
-        //     }else{
-        //         return redirect()->back()->with('error','Information de connexion non reconnu');
-        //     }
+                return redirect('/vendors/dashboard');
+            }else{
+                return redirect()->back()->with('error','Information de connexion de compte boutique non reconnu');
+            }
 
-        // } catch (Exception $e) {
-        //     //throw $th;
-        // }
+        } catch (Exception $e) {
+            //throw $th;
+        }
 
     }
 

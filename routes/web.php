@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\VendorAuthenticationController;
-
+use App\Http\Controllers\Vendors\vendorDahboard;
+ 
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,14 @@ Route::prefix('vendors/accounts')->group(function() {
     Route::get('/register', [VendorAuthenticationController::class, 'register'])->name('vendors.register');
     Route::post('/register', [VendorAuthenticationController::class, 'handleRegister'])->name('vendors.handleRegister');
 
+
+});
+
+
+Route::middleware('vendor_middleware')->prefix('vendors/dashboard')->group(function() {
+
+    Route::get('/', [VendorDahboard::class, 'index'])->name('vendors.dashboard');
+    Route::get('/logout', [VendorDahboard::class, 'logout'])->name('vendors.logout');
 
 });
 
