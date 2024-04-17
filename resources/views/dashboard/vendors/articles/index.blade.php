@@ -8,58 +8,40 @@
         <li class="breadcrumb-item active">Consulter la liste</li>
     </ol>
     
-
-
     <div class="card mb-4">
         <div class="card-header" style="display: flex; justify-content: flex-end;">
-            
             <a href="{{ route('articles.create') }}" class="btn btn-primary btn-sm">Ajouter un article</a>
         </div>
         <div class="card-body">
-            <table id="datatablesSimple">
+            <table id="datatablesSimple" class="table">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                        <th></th>
+                        <th>Produit</th>
+                        <th>Prix</th>
+                        <th>Disponibilité</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
-                <tfoot>
-                    <tr>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
-                    </tr>
-                </tfoot>
                 <tbody>
-                    
-                    <tr>
-                        <td>Thor Walton</td>
-                        <td>Developer</td>
-                        <td>New York</td>
-                        <td>61</td>
-                        <td>2013/08/11</td>
-                        <td>$98,540</td>
-                    </tr>
-                    <tr>
-                        <td>Finn Camacho</td>
-                        <td>Support Engineer</td>
-                        <td>San Francisco</td>
-                        <td>47</td>
-                        <td>2009/07/07</td>
-                        <td>$87,500</td>
-                    </tr>
-                    
-
+                    @foreach ($articles as $article)
+                        <tr>
+                            <td>
+                                @if ($article->image)
+                                    <div style="background-image: url('{{ asset('storage/'. $article->image->path)}}'); width: 50px; height: 50px; background-position: center; background-size: cover;"></div>
+                                @endif
+                            </td>
+                            <td>{{ $article->name }}</td>
+                            <td>{{ $article->price }}</td>
+                            <td>{{ $article->active ? 'Disponible' : 'Rupture de stock' }}</td>
+                            <td>
+                                <!-- Ajoutez vos liens d'actions ici -->
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
-    </div>
+    </div> 
 </div>
 @endsection

@@ -30,10 +30,9 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Settings</a></li>
-                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><a class="dropdown-item" href="#!">Profil</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                        <li><a class="dropdown-item" href="{{ route('vendors.logout') }}">Me déconnecter</a></li>
                     </ul>
                 </li>
             </ul>
@@ -67,6 +66,12 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Paiements
                             </a>
+                            <a class="nav-link" href="{{ route('payments.configuration') }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Configurations
+                            </a>
+
+
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
@@ -99,8 +104,6 @@
         <script src="{{asset('js/datatables-simple-demo.js')}}"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
     </body>
 </html>

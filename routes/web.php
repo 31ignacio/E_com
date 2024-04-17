@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\userPaymentController;
 use App\Http\Controllers\VendorAuthenticationController;
 use App\Http\Controllers\Vendors\vendorDahboard;
- 
+use App\Http\Controllers\WebSiteControllerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +20,11 @@ use App\Http\Controllers\Vendors\vendorDahboard;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [WebSiteControllerController::class, 'index']);
+Route::get('/home', [WebSiteControllerController::class, 'index']);
+
+
 Route::get('/login', [UserAuthController::class, 'login'])->name('login');
 
 
@@ -40,7 +44,9 @@ Route::middleware(['guest'])->group(function () {
 
 
     // Route pour les utilisateur connectés
-Route::middleware(['auth'])->group(function () {
+    Route::middleware(['auth'])->group(function () {
+
+        Route::get('/articles/order/{id}', [userPaymentController::class, 'initPayment'])->name('order.articles');
     
     //Déconnexion
     Route::get('/logout', [UserAuthController::class, 'handleLogout'])->name('user.logout');
@@ -68,7 +74,12 @@ Route::middleware('vendor_middleware')->prefix('vendors/dashboard')->group(funct
     Route::prefix('articles')->group(function(){
         Route::get('/',[ArticleController::class, 'index'])->name('articles.index');
         Route::get('/create', [ArticleController::class, 'create'])->name('articles.create');
+        Route::post('/create', [ArticleController::class, 'handleCreate'])->name('articles.handleCreate');
+
     });
+
+    Route::get('payment-configuration', [PaymentController::class, 'getAccountInfo'])->name('payments.configuration');
+    Route::post('handle-payment-configuration', [PaymentController::class, 'handleUpdateInfo'])->name('payments.updateconfiguration');
 
 
     Route::get('/logout', [VendorDahboard::class, 'logout'])->name('vendors.logout');
